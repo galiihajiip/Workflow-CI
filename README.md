@@ -23,3 +23,5 @@ Workflow otomatis berjalan saat push ke `main`:
 4. Commit & push mlruns artifact ke repo
 5. Build Docker image dengan `mlflow models build-docker`
 6. Push image ke Docker Hub
+
+> CI Workflow triggered with Docker Hub secrets configured.
