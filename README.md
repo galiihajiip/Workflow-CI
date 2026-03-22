@@ -12,7 +12,7 @@ MLProject/
 ├── conda.yaml         # Environment dependencies
 ├── modelling.py       # Training script
 ├── dockerhub.txt      # Docker Hub image link
-└── insurance_preprocessing/  # Preprocessed dataset
+└── titanic_preprocessing/  # Dataset Titanic untuk training
 ```
 
 ## CI Workflow
@@ -23,5 +23,7 @@ Workflow otomatis berjalan saat push ke `main`:
 4. Commit & push mlruns artifact ke repo
 5. Build Docker image dengan `mlflow models build-docker`
 6. Push image ke Docker Hub
+
+Model yang dilatih pada workflow ini menggunakan dataset Titanic dengan target `Survived`.
 
 > CI Workflow triggered with Docker Hub secrets configured.

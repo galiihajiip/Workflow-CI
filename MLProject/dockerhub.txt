@@ -1,1 +1,1 @@
-https://hub.docker.com/repository/docker/gapzzzzzzzzz/insurance_model/general
+https://hub.docker.com/repository/docker/galiihajiip/titanic_model/general
