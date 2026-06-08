@@ -52,26 +52,27 @@ def main():
     os.makedirs("model", exist_ok=True)
 
     os.environ["MLFLOW_ALLOW_FILE_STORE"] = "true"
-    mlflow.set_tracking_uri("file:./mlruns")
-    mlflow.set_experiment("Diabetes_CI_Workflow")
 
     X_train, y_train, X_test, y_test = load_data()
 
-    with mlflow.start_run() as run:
-        mlflow.sklearn.autolog()
+    # mlflow run already creates an active run; do not call start_run() again.
+    mlflow.sklearn.autolog()
 
-        model = train_model(X_train, y_train)
-        metrics, y_pred = evaluate_model(model, X_test, y_test)
+    model = train_model(X_train, y_train)
+    metrics, y_pred = evaluate_model(model, X_test, y_test)
+    mlflow.log_metrics(metrics)
 
-        mlflow.sklearn.log_model(
-            sk_model=model,
-            artifact_path="model",
-        )
+    mlflow.sklearn.log_model(
+        sk_model=model,
+        artifact_path="model",
+    )
 
-        joblib.dump(model, "model/model.pkl")
-        print(f"\n[INFO] Model saved to model/model.pkl")
+    joblib.dump(model, "model/model.pkl")
+    print(f"\n[INFO] Model saved to model/model.pkl")
+
+    run = mlflow.active_run()
+    if run is not None:
         print(f"[INFO] MLflow Run ID: {run.info.run_id}")
-
         with open("run_id.txt", "w") as f:
             f.write(run.info.run_id)
 
