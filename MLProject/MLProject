@@ -1,4 +1,5 @@
 name: Diabetes_CI
+experiment_name: Diabetes_CI_Workflow
 conda_env: conda.yaml
 
 entry_points:
